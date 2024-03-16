@@ -3,6 +3,9 @@ import Square from "./Square";
 import Button from "@mui/material/Button";
 import { reducer } from "../Store/TicTacToeReducer";
 import classes from "../Store/gameStyles.module.css";
+import { FiRefreshCw } from "react-icons/fi";
+import { IoMdSettings } from "react-icons/io";
+import Players from "./Players";
 
 const initialData = {
   firstName: "",
@@ -39,6 +42,8 @@ function TicTacToe() {
       if (states.data[id]) return;
       states.data[id] = states.turn ? "X" : "0";
       dispatch({ type: "CHECK_WINNER" });
+
+      console.log("state", states);
 
       if (
         (states.data[0] &&
@@ -81,132 +86,106 @@ function TicTacToe() {
   };
 
   return (
-    <div
-      style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
-    >
-      <div style={{ marginBottom: "20px", margin: "auto" }}>
-        <h1>Player's name:</h1>
-        <input
-          placeholder="Player 1"
-          value={states.firstName}
-          onChange={(e) =>
-            dispatch({ type: "FIRST_NAME", payload: e.target.value })
-          }
-          className={classes.input}
-        />
-        <br />
-        <br />
-        <input
-          placeholder="Player 2"
-          value={states.lastName}
-          onChange={(e) =>
-            dispatch({ type: "LAST_NAME", payload: e.target.value })
-          }
-          className={classes.input}
-        />
+    <div className="flex flex-col justify-center items-center h-screen w-full gap-[2vw]">
+      <Players states={states} dispatch={dispatch} />
 
-        <p style={{ color: "red" }}>{states.errorMsg}</p>
-
-        <Button
-          variant="contained"
-          color="success"
-          onClick={newGame}
-          disabled={states.isDisabled}
-          className={classes.initial_button}
-        >
-          NEW GAME
-        </Button>
-
-        <Button
-          variant="contained"
-          color="success"
-          onClick={startTheGame}
-          className={classes.initial_button}
-        >
-          START
-        </Button>
-
-        <br />
-      </div>
-
-      <div
-        style={{
-          width: "500px",
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          marginTop: "16px",
-        }}
-      >
-        <div>
-          <div className={classes.row}>
-            <Square
-              handleClick={handleClick.bind(null, 0)}
-              data={states.data[0]}
-              isDisabled={states.isDisabled}
-            />
-            <Square
-              handleClick={handleClick.bind(null, 1)}
-              data={states.data[1]}
-              isDisabled={states.isDisabled}
-            />
-            <Square
-              handleClick={handleClick.bind(null, 2)}
-              data={states.data[2]}
-              isDisabled={states.isDisabled}
-            />
-          </div>
-          <div className={classes.row}>
-            <Square
-              handleClick={handleClick.bind(null, 3)}
-              data={states.data[3]}
-              isDisabled={states.isDisabled}
-            />
-            <Square
-              handleClick={handleClick.bind(null, 4)}
-              data={states.data[4]}
-              isDisabled={states.isDisabled}
-            />
-            <Square
-              handleClick={handleClick.bind(null, 5)}
-              data={states.data[5]}
-              isDisabled={states.isDisabled}
-            />
-          </div>
-          <div className={classes.row}>
-            <Square
-              handleClick={handleClick.bind(null, 6)}
-              data={states.data[6]}
-              isDisabled={states.isDisabled}
-            />
-            <Square
-              handleClick={handleClick.bind(null, 7)}
-              data={states.data[7]}
-              isDisabled={states.isDisabled}
-            />
-            <Square
-              handleClick={handleClick.bind(null, 8)}
-              data={states.data[8]}
-              isDisabled={states.isDisabled}
-            />
-          </div>
+      <div>
+        <div className={classes.row}>
+          <Square
+            handleClick={handleClick.bind(null, 0)}
+            data={states.data[0]}
+            isDisabled={states.isDisabled}
+          />
+          <Square
+            handleClick={handleClick.bind(null, 1)}
+            data={states.data[1]}
+            isDisabled={states.isDisabled}
+          />
+          <Square
+            handleClick={handleClick.bind(null, 2)}
+            data={states.data[2]}
+            isDisabled={states.isDisabled}
+          />
         </div>
-
-        <div>
-          <h2>Who's Turn?</h2>
-          <h4 className={classes.turn}>
-            <i>{states.whoTurn}</i>
-          </h4>
+        <div className={classes.row}>
+          <Square
+            handleClick={handleClick.bind(null, 3)}
+            data={states.data[3]}
+            isDisabled={states.isDisabled}
+          />
+          <Square
+            handleClick={handleClick.bind(null, 4)}
+            data={states.data[4]}
+            isDisabled={states.isDisabled}
+          />
+          <Square
+            handleClick={handleClick.bind(null, 5)}
+            data={states.data[5]}
+            isDisabled={states.isDisabled}
+          />
+        </div>
+        <div className={classes.row}>
+          <Square
+            handleClick={handleClick.bind(null, 6)}
+            data={states.data[6]}
+            isDisabled={states.isDisabled}
+          />
+          <Square
+            handleClick={handleClick.bind(null, 7)}
+            data={states.data[7]}
+            isDisabled={states.isDisabled}
+          />
+          <Square
+            handleClick={handleClick.bind(null, 8)}
+            data={states.data[8]}
+            isDisabled={states.isDisabled}
+          />
         </div>
       </div>
 
-      <p className={classes.winner}>
-        <span>{states.winner}</span>
-      </p>
+      <div>
+        <div>
+          <Button
+            variant="contained"
+            color="success"
+            onClick={newGame}
+            disabled={states.isDisabled}
+            className="!m-3 !bg-[#39bcd4] !text-white"
+          >
+            NEW GAME
+          </Button>
 
-      <Button color="primary" variant="contained" onClick={resetGame}>
-        RESET
-      </Button>
+          <Button
+            variant="contained"
+            color="success"
+            onClick={startTheGame}
+            className="!m-3 !bg-[#3989d4] !text-white"
+          >
+            START
+          </Button>
+        </div>
+
+        <div className="w-full flex items-center justify-between mt-[3vw]">
+          <div
+            className="bg-zinc-500 inline-block p-3 rounded-full cursor-pointer hover:bg-zinc-400 transition-all duration-500"
+            onClick={resetGame}
+          >
+            <FiRefreshCw className="text-zinc-100" />
+          </div>
+
+          {!states.isDisabled && (
+            <div className="inline-block">
+              <h2 className="border-2 border-zinc-500 rounded-3xl  text-zinc-500 text-[1vw] uppercase px-4 py-1">
+                {states.whoTurn}
+              </h2>
+            </div>
+          )}
+
+          <div className="bg-zinc-500 inline-block p-3 rounded-full cursor-pointer hover:bg-zinc-400 transition-all duration-500">
+            <IoMdSettings className="text-zinc-100" />
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
