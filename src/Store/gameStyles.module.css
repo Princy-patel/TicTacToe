@@ -22,7 +22,6 @@
 .row {
   display: grid;
   grid-template-columns: repeat(3, 100px);
-  grid-gap: 15px;
 }
 
 .input {
@@ -47,20 +46,18 @@
 .Square {
   border: none;
   outline: none;
-  background-color: #6c5ce7;
+  border: 2px solid black;
   padding: 10px 20px;
   font-size: 15px;
   font-weight: 700;
-  color: #fff;
+  color: #000;
   border-radius: 5px;
   transition: all ease 0.1s;
-  box-shadow: 0px 5px 0px 0px #a29bfe;
-  margin: 10px;
 }
 
 .Square:active {
   transform: translateY(5px);
-  box-shadow: 0px 0px 0px 0px #a29bfe;
+  box-shadow: 0px 0px 0px 0px #71717a;
 }
 
 .disabled {

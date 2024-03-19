@@ -3,7 +3,9 @@ import React from "react";
 function Players({ states, dispatch }) {
   return (
     <div className="flex flex-col justify-center items-center">
-      <h1 className="text-[2vw] mb-2 font-semibold">TicTacToe</h1>
+      <h1 className="text-[2vw] mb-2 font-bold text-[#3989d4] [text-shadow:2px_3px_4px_rgba(57,188,212,0.87)] shadow-red-500">
+        TicTacToe
+      </h1>
       <input
         placeholder="Player 1"
         value={states.firstName}

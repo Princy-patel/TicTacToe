@@ -6,6 +6,8 @@ import classes from "../Store/gameStyles.module.css";
 import { FiRefreshCw } from "react-icons/fi";
 import { IoMdSettings } from "react-icons/io";
 import Players from "./Players";
+import useWindowSize from "react-use/lib/useWindowSize";
+import Confetti from "react-confetti";
 
 const initialData = {
   firstName: "",
@@ -20,6 +22,7 @@ const initialData = {
 
 function TicTacToe() {
   const [states, dispatch] = useReducer(reducer, initialData);
+  const { width, height } = useWindowSize();
 
   const startTheGame = function () {
     if (states.firstName && states.lastName) {
@@ -42,9 +45,6 @@ function TicTacToe() {
       if (states.data[id]) return;
       states.data[id] = states.turn ? "X" : "0";
       dispatch({ type: "CHECK_WINNER" });
-
-      console.log("state", states);
-
       if (
         (states.data[0] &&
           states.data[0] === states.data[1] &&
@@ -150,7 +150,9 @@ function TicTacToe() {
             color="success"
             onClick={newGame}
             disabled={states.isDisabled}
-            className="!m-3 !bg-[#39bcd4] !text-white"
+            className={`!m-3 !bg-[#39bcd4] !text-white ${
+              states.isDisabled && "opacity-50"
+            }`}
           >
             NEW GAME
           </Button>
@@ -163,6 +165,10 @@ function TicTacToe() {
           >
             START
           </Button>
+
+          <p className={classes.winner}>
+            <span>{states.winner}</span>
+          </p>
         </div>
 
         <div className="w-full flex items-center justify-between mt-[3vw]">
