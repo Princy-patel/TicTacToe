@@ -169,7 +169,7 @@ function TicTacToe() {
 
           {states.isWinner && (
             <>
-              <Confetti width={width} height={height} recycle={false}/>
+              <Confetti width={width} height={height} recycle={false} />
               <h2 className="text-[3vw] font-bold">{states.result}</h2>
             </>
           )}
@@ -183,7 +183,7 @@ function TicTacToe() {
             <FiRefreshCw className="text-zinc-100" />
           </div>
 
-          {!states.isDisabled && (
+          {states.data.some((boxes) => boxes !== "") && (
             <div className="inline-block">
               <h2 className="border-2 border-zinc-500 rounded-3xl  text-zinc-500 text-[1vw] uppercase px-4 py-1">
                 {states.whoTurn}
