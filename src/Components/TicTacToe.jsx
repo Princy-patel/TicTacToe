@@ -14,10 +14,11 @@ const initialData = {
   lastName: "",
   errorMsg: "",
   whoTurn: "",
-  winner: "",
+  result: "",
   turn: true,
   data: ["", "", "", "", "", "", "", "", ""],
   isDisabled: true,
+  isWinner: false,
 };
 
 function TicTacToe() {
@@ -166,9 +167,12 @@ function TicTacToe() {
             START
           </Button>
 
-          <p className={classes.winner}>
-            <span>{states.winner}</span>
-          </p>
+          {states.isWinner && (
+            <>
+              <Confetti width={width} height={height} recycle={false}/>
+              <h2 className="text-[3vw] font-bold">{states.result}</h2>
+            </>
+          )}
         </div>
 
         <div className="w-full flex items-center justify-between mt-[3vw]">

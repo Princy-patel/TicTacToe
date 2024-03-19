@@ -14,7 +14,7 @@ export const reducer = function (state, action) {
       whoTurn: ``,
       errorMsg: "",
       isDisabled: true,
-      winner: "",
+      result: "",
       firstName: "",
       lastName: "",
     };
@@ -41,9 +41,10 @@ export const reducer = function (state, action) {
     return {
       ...state,
       whoTurn: `${turn ? firstName : lastName}`,
-      winner: `Winner: ${!turn ? firstName : lastName}`,
+      result: `Winner: ${!turn ? firstName : lastName} 🎉`,
       turn: true,
       isDisabled: true,
+      isWinner: true,
     };
   }
 
@@ -51,7 +52,7 @@ export const reducer = function (state, action) {
     return {
       ...state,
       data: ["", "", "", "", "", "", "", "", ""],
-      winner: "",
+      result: "",
       errorMsg: "",
       whoTurn: "",
       turn: true,
@@ -62,8 +63,9 @@ export const reducer = function (state, action) {
     return {
       ...state,
       data: ["", "", "", "", "", "", "", "", ""],
-      winner: `Draw! Play again`,
+      result: `Draw! Play again`,
       turn: true,
+      isWinner: true,
     };
   }
 
@@ -74,7 +76,7 @@ export const reducer = function (state, action) {
       whoTurn: ``,
       errorMsg: "",
       isDisabled: false,
-      winner: "",
+      result: "",
     };
   }
 };
